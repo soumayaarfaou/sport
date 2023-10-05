@@ -1,0 +1,44 @@
+<app-banner [y]="title"></app-banner>
+
+  
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <form [formGroup]="weatherForm">
+            <div class="form-group">
+              <input type="text" formControlName="city" class="form-control" placeholder="donner le nom de City">
+            </div>
+            <div *ngIf="weatherForm.controls['city'].invalid &&
+             (weatherForm.controls['city'].dirty ||
+             weatherForm.controls['city'].touched )">
+                  <div *ngIf="weatherForm.controls['city'].errors.required">
+                           city required
+                  </div>
+                  <div *ngIf="weatherForm.controls['city'].errors.minlength">
+                           city should have at least 3 caracteres
+                  </div>
+            </div>
+        
+
+            
+            <div class="form-group">
+              <input type="submit"   [disabled]="weatherForm.invalid" class="btn btn-primary py-3 px-5" (click)="searchWeather()" value="search">
+            </div>
+          </form>
+           <div *ngIf="search !== null">
+            <h2>Weather Information of the city </h2>
+            <p>Temperature: {{ search.tempurature }}°C</p>
+            <p>Pressure: {{ search.pressure }} hPa</p>
+            <p>Humidity: {{ search.humidity }}%</p>
+            <p>Wind Speed: {{ search.windSpeed }} m/s</p>
+            <img [src]="search.icone" alt="">
+          </div>
+          
+      
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
